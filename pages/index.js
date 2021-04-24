@@ -4,8 +4,22 @@ import { MicrophoneIcon, ViewGridIcon } from '@heroicons/react/solid'
 import { SearchIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
 import Footer from '../components/Footer'
+import { useRef } from 'react'
+import { useRouter } from 'next/router'
 
 export default function Home() {
+    const router = useRouter()
+    const searchInputRef = useRef(null)
+
+    const search = (e) => {
+        e.preventDefault()
+        const term = searchInputRef.current.value
+
+        if (!term) return
+
+        router.push(`/search?term=${term}`)
+    }
+
     return (
         <div className="flex flex-col items-center justify-center h-screen">
             <Head>
@@ -42,19 +56,33 @@ export default function Home() {
                 >
                     <SearchIcon className="h-5 mr-3 text-gray-500" />
                     <input
+                        ref={searchInputRef}
                         type="text"
                         className="focus:outline-none flex-grow"
                     />
                     <MicrophoneIcon className="h-5" />
+                    <button className="hidden" type="submit" onClick={search} />
                 </div>
 
                 <div className="flex flex-col w-1/2 space-y-2 justify-center mt-8 sm:space-y-0 sm:flex-row sm:space-x-4">
-                    <button className="btn" onClick={(e) => e.preventDefault()}>
+                    <button className="btn" onClick={search}>
                         Google Search
                     </button>
-                    <button className="btn" onClick={(e) => e.preventDefault()}>
+                    <button className="btn" onClick={search}>
                         I'm Feeling Lucky
                     </button>
+                </div>
+
+                <div className="mt-10 flex w-full items-center justify-center text-sm">
+                    <Image
+                        className="rounded-full"
+                        src="https://geneva.il.us/ImageRepository/Document?documentID=9344"
+                        width={50}
+                        height={50}
+                    />
+                    <p className="stay_safe">
+                        Wear a mask. Help slow the spread of COVID-19
+                    </p>
                 </div>
             </form>
 
