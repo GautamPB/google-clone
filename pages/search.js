@@ -1,13 +1,11 @@
 import Head from 'next/head'
 import Header from '../components/Header'
-import { API_KEY, CONTEXT_KEY } from '../keys'
 import Response from '../Response'
 import { useRouter } from 'next/router'
 import SearchResults from '../components/SearchResults'
 
 const Search = ({ results }) => {
     const router = useRouter()
-    console.log(results)
 
     return (
         <div>
@@ -26,6 +24,8 @@ const Search = ({ results }) => {
 export default Search
 
 export async function getServerSideProps(context) {
+    const API_KEY = process.env.API_KEY
+    const CONTEXT_KEY = process.env.CONTEXT_KEY
     const useDummyData = false
     const startIndex = context.query.start || '0'
     const data = useDummyData
