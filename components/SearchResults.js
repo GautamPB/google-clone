@@ -1,3 +1,5 @@
+import PaginationButtons from '../components/PaginationButtons'
+
 const SearchResults = ({ results }) => {
     return (
         <div className="mx-auto w-full px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52">
@@ -5,15 +7,23 @@ const SearchResults = ({ results }) => {
 
             {results.items?.map((result) => (
                 <div key={result.link} className="max-w-xl mb-8">
-                    <div>
-                        <a href={result.link} className="text-sml">
+                    <div className="group">
+                        <a href={result.link} className="line-clamp-1 text-sml">
                             {result.formattedUrl}
+                        </a>
+
+                        <a href={result.link}>
+                            <h2 className="truncate text-blue-800 group-hover:underline font-medium text-xl">
+                                {result.title}
+                            </h2>
                         </a>
                     </div>
 
-                    <div>{result.snippet}</div>
+                    <p className="line-clamp-2">{result.snippet}</p>
                 </div>
             ))}
+
+            <PaginationButtons />
         </div>
     )
 }

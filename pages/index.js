@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 export default function Home() {
     const router = useRouter()
     const searchInputRef = useRef(null)
+    const startIndex = 0
 
     const search = (e) => {
         e.preventDefault()
